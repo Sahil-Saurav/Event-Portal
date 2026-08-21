@@ -1,0 +1,1 @@
+EventPortal application in SpringBoot to Manage the events in like workshop ,any tech and non-tech related events in colleges.
