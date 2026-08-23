@@ -3,11 +3,13 @@ package com.example.sahil.eventportal.service.EventService;
 import com.example.sahil.eventportal.exception.ResourceNotFoundException;
 import com.example.sahil.eventportal.models.dto.EventDetailsDTO;
 import com.example.sahil.eventportal.models.dto.PostEventDTO;
+import com.example.sahil.eventportal.models.dto.UserDTO;
 import com.example.sahil.eventportal.models.entity.Department;
 import com.example.sahil.eventportal.models.entity.Event;
 import com.example.sahil.eventportal.models.entity.User;
 import com.example.sahil.eventportal.repository.DepartmentRepository;
 import com.example.sahil.eventportal.repository.EventRepository;
+import com.example.sahil.eventportal.repository.RegistrationRepository;
 import com.example.sahil.eventportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,14 +26,17 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
     private UserRepository userRepository;
     private DepartmentRepository departmentRepository;
+    private RegistrationRepository registrationRepository;
 
     @Autowired
     EventServiceImpl(EventRepository eventRepository,
                      UserRepository userRepository,
-                     DepartmentRepository departmentRepository) {
+                     DepartmentRepository departmentRepository,
+                     RegistrationRepository registrationRepository) {
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
         this.departmentRepository = departmentRepository;
+        this.registrationRepository = registrationRepository;
     }
 
     @Override
@@ -68,5 +73,12 @@ public class EventServiceImpl implements EventService {
                 .map(event -> new EventDetailsDTO(event))
                 .collect(Collectors.toList());
         return eventDetailsDTOs;
+    }
+
+    @Override
+    public List<UserDTO> getAllUsersFromEvent(Long eventId) {
+        List<User> users = registrationRepository.findAllStudentByEventId(eventId);
+        List<UserDTO> userDTOS = users.stream().map(UserDTO::new).collect(Collectors.toList());
+        return userDTOS;
     }
 }

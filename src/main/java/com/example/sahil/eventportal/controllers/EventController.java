@@ -3,6 +3,7 @@ package com.example.sahil.eventportal.controllers;
 
 import com.example.sahil.eventportal.models.dto.EventDetailsDTO;
 import com.example.sahil.eventportal.models.dto.PostEventDTO;
+import com.example.sahil.eventportal.models.dto.UserDTO;
 import com.example.sahil.eventportal.service.EventService.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,5 +38,14 @@ public class EventController {
     public ResponseEntity<List<EventDetailsDTO>> getAllEvents() {
         List<EventDetailsDTO> events = eventService.getAllEvent();
         return new ResponseEntity<>(events, HttpStatus.OK);
+    }
+
+    @GetMapping("/event/users/{eventId}")
+    public ResponseEntity<List<UserDTO>> getAllUsersInEvent(@PathVariable("eventId") Long eventId) {
+        List<UserDTO> userDTOS = eventService.getAllUsersFromEvent(eventId);
+        if(userDTOS.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(userDTOS, HttpStatus.OK);
     }
 }

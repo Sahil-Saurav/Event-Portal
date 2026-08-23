@@ -2,6 +2,8 @@ package com.example.sahil.eventportal.controllers;
 
 import com.example.sahil.eventportal.models.dto.DepartmentDTO;
 import com.example.sahil.eventportal.models.dto.DeptUsersDTO;
+import com.example.sahil.eventportal.models.dto.EventDTO;
+import com.example.sahil.eventportal.models.dto.UserDTO;
 import com.example.sahil.eventportal.models.entity.Department;
 import com.example.sahil.eventportal.service.DepartmentService.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +43,23 @@ public class DepartmentController {
         return new ResponseEntity<>(departmentDTOS, HttpStatus.OK);
     }
 
+    @GetMapping("/department/users/{deptCode}")
+    public ResponseEntity<List<UserDTO>> getAllUsersInDepartment(@PathVariable String deptCode) {
+        Department department = departmentService.getDepartmentByDeptCode(deptCode);
+        List<UserDTO> userDTOs = departmentService.getAllUsersInDepartment(department);
+        if(userDTOs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(userDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/department/events/{deptCode}")
+    public ResponseEntity<List<EventDTO>> getAllEventsInDepartment(@PathVariable String deptCode) {
+        Department department = departmentService.getDepartmentByDeptCode(deptCode);
+        List<EventDTO> eventDTOs = departmentService.getAllEventsInDepartment(department);
+        if(eventDTOs.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(eventDTOs, HttpStatus.OK);
+    }
 }

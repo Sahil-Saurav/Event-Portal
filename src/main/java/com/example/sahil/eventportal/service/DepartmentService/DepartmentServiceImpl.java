@@ -2,13 +2,20 @@ package com.example.sahil.eventportal.service.DepartmentService;
 
 import com.example.sahil.eventportal.exception.ResourceNotFoundException;
 import com.example.sahil.eventportal.models.dto.DepartmentDTO;
+import com.example.sahil.eventportal.models.dto.EventDTO;
+import com.example.sahil.eventportal.models.dto.UserDTO;
 import com.example.sahil.eventportal.models.entity.Department;
+import com.example.sahil.eventportal.models.entity.Event;
+import com.example.sahil.eventportal.models.entity.User;
 import com.example.sahil.eventportal.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -43,5 +50,19 @@ public class DepartmentServiceImpl implements DepartmentService {
             throw new ResourceNotFoundException("List is Empty!");
         }
         return departments;
+    }
+
+    @Override
+    public List<UserDTO> getAllUsersInDepartment(Department department) {
+        Set<User> users = department.getUsers();
+        List<UserDTO> userDTOs = users.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
+        return userDTOs;
+    }
+
+    @Override
+    public List<EventDTO> getAllEventsInDepartment(Department department) {
+        Set<Event> events = department.getEvents();
+        List<EventDTO> eventDTOs = events.stream().map(event -> new EventDTO(event)).collect(Collectors.toList());
+        return eventDTOs;
     }
 }
