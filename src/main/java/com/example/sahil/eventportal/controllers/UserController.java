@@ -2,6 +2,7 @@ package com.example.sahil.eventportal.controllers;
 
 import com.example.sahil.eventportal.models.dto.LoginDTO;
 import com.example.sahil.eventportal.models.dto.PostUserDTO;
+import com.example.sahil.eventportal.models.dto.TokenDTO;
 import com.example.sahil.eventportal.models.dto.UserDetailsDTO;
 import com.example.sahil.eventportal.models.entity.Department;
 import com.example.sahil.eventportal.models.entity.User;
@@ -52,12 +53,13 @@ public class UserController {
     }
 
     @PostMapping("/public/login")
-    public String login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<TokenDTO> login(@RequestBody LoginDTO loginDTO) {
         User user = userService.findUserByEmail(loginDTO.getEmail());
         if(user == null) {
             throw new UsernameNotFoundException("Invalid Email or User Doesn't Exist");
         }
-        return userService.verify(loginDTO);
+        String token = userService.verify(loginDTO);
+        return new ResponseEntity<>(new TokenDTO(token), HttpStatus.OK);
     }
     @DeleteMapping("/user")
     public ResponseEntity<String> deleteUser(@RequestBody LoginDTO loginDTO) {
