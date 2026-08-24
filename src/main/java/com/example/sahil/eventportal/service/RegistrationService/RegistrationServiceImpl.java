@@ -1,6 +1,7 @@
 package com.example.sahil.eventportal.service.RegistrationService;
 
 import com.example.sahil.eventportal.Enumerated;
+import com.example.sahil.eventportal.event.WaitlistPromotedEvent;
 import com.example.sahil.eventportal.exception.ResourceNotFoundException;
 import com.example.sahil.eventportal.models.dto.PostRegistrationDTO;
 import com.example.sahil.eventportal.models.dto.RegistrationDTO;
@@ -11,6 +12,7 @@ import com.example.sahil.eventportal.repository.EventRepository;
 import com.example.sahil.eventportal.repository.RegistrationRepository;
 import com.example.sahil.eventportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     private UserRepository userRepository;
     private EventRepository eventRepository;
     private RegistrationRepository registrationRepository;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
     public RegistrationServiceImpl(UserRepository userRepository,
@@ -80,6 +85,9 @@ public class RegistrationServiceImpl implements RegistrationService {
         if(nextInLine != null){
             nextInLine.setStatus(Enumerated.RegistrationStatus.CONFIRMED);
             registrationRepository.save(nextInLine);
+            String subject = "Confirmation of your registration";
+            String body = "Congratulations your waitlisted registration has been CONFIRMED for \n Event: "+registration.getEvent().getTitle();
+            applicationEventPublisher.publishEvent(new WaitlistPromotedEvent(nextInLine.getStudent().getEmail(),subject,body));
         }else{
             event.setRegisteredCount(event.getRegisteredCount() - 1);
             eventRepository.save(event);

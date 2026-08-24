@@ -4,7 +4,7 @@ import com.example.sahil.eventportal.Enumerated.RegistrationStatus;
 import com.example.sahil.eventportal.models.entity.Registration;
 
 public class RegistrationDTO {
-    private Long eventId;
+    private Long registrationId;
     private UserDTO user;
     private EventDTO event;
     private RegistrationStatus registrationStatus;
@@ -15,18 +15,18 @@ public class RegistrationDTO {
     public RegistrationDTO(Registration registration) {
         this.user = registration.getStudent() != null ? new UserDTO(registration.getStudent()) : null;
         this.event = registration.getEvent() != null ? new EventDTO(registration.getEvent()) : null;
-        this.eventId = registration.getId();
+        this.registrationId = registration.getId();
         this.registrationStatus = registration.getStatus();
         this.isAttended = registration.getIsAttended();
 
     }
 
-    public Long getEventId() {
-        return eventId;
+    public Long getRegistrationId() {
+        return registrationId;
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public void setRegistrationId(Long registrationId) {
+        this.registrationId = registrationId;
     }
 
     public RegistrationStatus getRegistrationStatus() {
