@@ -1,4 +1,4 @@
-package com.example.sahil.eventportal.models.dto;
+package com.example.sahil.eventportal.models.dto.responseDto;
 
 public class TokenDTO {
     private String accessToken;

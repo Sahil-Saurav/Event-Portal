@@ -1,4 +1,4 @@
-package com.example.sahil.eventportal.models.dto;
+package com.example.sahil.eventportal.models.dto.requestDto;
 
 public class LoginDTO {
     private String email;

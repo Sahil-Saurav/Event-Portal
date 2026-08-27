@@ -1,4 +1,4 @@
-package com.example.sahil.eventportal.models.dto;
+package com.example.sahil.eventportal.models.dto.responseDto;
 
 import com.example.sahil.eventportal.Enumerated.RegistrationStatus;
 import com.example.sahil.eventportal.models.entity.Registration;

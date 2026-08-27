@@ -15,4 +15,10 @@ public class GlobalExceptionHandler {
         ErrorEntity response = new ErrorEntity(e.getMessage(), LocalDateTime.now());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(UnAuthorizedAccess.class)
+    public ResponseEntity<ErrorEntity> UnAuthorizedAccess(UnAuthorizedAccess e){
+        ErrorEntity response = new ErrorEntity(e.getMessage(), LocalDateTime.now());
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+    }
 }

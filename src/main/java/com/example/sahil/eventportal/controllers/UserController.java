@@ -1,9 +1,12 @@
 package com.example.sahil.eventportal.controllers;
 
-import com.example.sahil.eventportal.models.dto.LoginDTO;
-import com.example.sahil.eventportal.models.dto.PostUserDTO;
-import com.example.sahil.eventportal.models.dto.TokenDTO;
-import com.example.sahil.eventportal.models.dto.UserDetailsDTO;
+import com.example.sahil.eventportal.Enumerated;
+import com.example.sahil.eventportal.models.dto.UserPrincipal;
+import com.example.sahil.eventportal.models.dto.requestDto.LoginDTO;
+import com.example.sahil.eventportal.models.dto.requestDto.PostAssignRoleDTO;
+import com.example.sahil.eventportal.models.dto.requestDto.PostUserDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.TokenDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.UserDetailsDTO;
 import com.example.sahil.eventportal.models.entity.Department;
 import com.example.sahil.eventportal.models.entity.User;
 import com.example.sahil.eventportal.service.DepartmentService.DepartmentService;
@@ -11,10 +14,13 @@ import com.example.sahil.eventportal.service.UserService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
@@ -61,8 +67,32 @@ public class UserController {
         String token = userService.verify(loginDTO);
         return new ResponseEntity<>(new TokenDTO(token), HttpStatus.OK);
     }
-    @DeleteMapping("/user")
-    public ResponseEntity<String> deleteUser(@RequestBody LoginDTO loginDTO) {
-        return userService.deleteUserByEmail(loginDTO);
+
+    @PostMapping("/admin/user/role")
+    public ResponseEntity<String> assignRoleToUser(@RequestBody PostAssignRoleDTO assignRoleDTO) {
+        userService.assignRoleToUser(assignRoleDTO.getEmail(), assignRoleDTO.getRole());
+        return new ResponseEntity<>("Assigned Role",HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{role}")
+    public ResponseEntity<Set<UserDetailsDTO>> getUserByRole(@PathVariable("role") Enumerated.RolesEnum role) {
+        Set<User> users = userService.getUserBasedOnRole(role);
+        Set<UserDetailsDTO> usersDTO = users
+                .stream()
+                .map(user -> new UserDetailsDTO(user))
+                .collect(Collectors.toSet());
+        return new ResponseEntity<>(usersDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/remove-own-account")
+    public ResponseEntity<String> deleteOwnAccount(@AuthenticationPrincipal UserPrincipal user) {
+        userService.deleteByEmailId(user.getUsername());
+        return new ResponseEntity<>("User Deleted Successfully",HttpStatus.OK);
+    }
+
+    @DeleteMapping("/admin/user/delete")
+    public ResponseEntity<String> deleteUserByEmailId(@RequestParam("email") String email){
+        userService.deleteByEmailId(email);
+        return new ResponseEntity<>("User Deleted Successfully",HttpStatus.OK);
     }
 }

@@ -1,9 +1,9 @@
 package com.example.sahil.eventportal.service.EventService;
 
 import com.example.sahil.eventportal.exception.ResourceNotFoundException;
-import com.example.sahil.eventportal.models.dto.EventDetailsDTO;
-import com.example.sahil.eventportal.models.dto.PostEventDTO;
-import com.example.sahil.eventportal.models.dto.UserDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.EventDetailsDTO;
+import com.example.sahil.eventportal.models.dto.requestDto.PostEventDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.UserDTO;
 import com.example.sahil.eventportal.models.entity.Department;
 import com.example.sahil.eventportal.models.entity.Event;
 import com.example.sahil.eventportal.models.entity.User;
@@ -12,11 +12,9 @@ import com.example.sahil.eventportal.repository.EventRepository;
 import com.example.sahil.eventportal.repository.RegistrationRepository;
 import com.example.sahil.eventportal.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

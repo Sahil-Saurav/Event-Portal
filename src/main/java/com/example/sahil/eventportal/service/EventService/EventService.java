@@ -1,9 +1,8 @@
 package com.example.sahil.eventportal.service.EventService;
 
-import com.example.sahil.eventportal.models.dto.EventDetailsDTO;
-import com.example.sahil.eventportal.models.dto.PostEventDTO;
-import com.example.sahil.eventportal.models.dto.UserDTO;
-import com.example.sahil.eventportal.models.entity.Event;
+import com.example.sahil.eventportal.models.dto.responseDto.EventDetailsDTO;
+import com.example.sahil.eventportal.models.dto.requestDto.PostEventDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.UserDTO;
 
 import java.util.List;
 

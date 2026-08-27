@@ -7,4 +7,9 @@ public class Enumerated {
     public enum RegistrationStatus {
         WAITLISTED,CONFIRMED,CANCELLED
     }
+    public enum RolesEnum{
+        ROLE_ADMIN,
+        ROLE_STUDENT,
+        ROLE_FACULTY
+    }
 }

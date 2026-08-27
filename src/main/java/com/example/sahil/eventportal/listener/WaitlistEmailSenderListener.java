@@ -2,6 +2,7 @@ package com.example.sahil.eventportal.listener;
 
 import com.example.sahil.eventportal.event.WaitlistPromotedEvent;
 import com.example.sahil.eventportal.service.EmailService.EmailSender;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
@@ -12,6 +13,7 @@ public class WaitlistEmailSenderListener {
 
     private EmailSender mailSender;
 
+    @Autowired
     public WaitlistEmailSenderListener(EmailSender mailSender) {
         this.mailSender = mailSender;
     }

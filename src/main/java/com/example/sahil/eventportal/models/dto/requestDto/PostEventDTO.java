@@ -1,6 +1,4 @@
-package com.example.sahil.eventportal.models.dto;
-
-import com.example.sahil.eventportal.Enumerated.EventApprovalStatus;
+package com.example.sahil.eventportal.models.dto.requestDto;
 
 import java.time.LocalDateTime;
 

@@ -1,6 +1,6 @@
 package com.example.sahil.eventportal.models.entity;
 
-import com.example.sahil.eventportal.models.dto.DepartmentDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.DepartmentDTO;
 import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

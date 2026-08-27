@@ -1,7 +1,7 @@
 package com.example.sahil.eventportal.controllers;
 
-import com.example.sahil.eventportal.models.dto.PostRegistrationDTO;
-import com.example.sahil.eventportal.models.dto.RegistrationDTO;
+import com.example.sahil.eventportal.models.dto.requestDto.PostRegistrationDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.RegistrationDTO;
 import com.example.sahil.eventportal.service.RegistrationService.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

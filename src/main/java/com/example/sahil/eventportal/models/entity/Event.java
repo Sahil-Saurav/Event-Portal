@@ -1,6 +1,6 @@
 package com.example.sahil.eventportal.models.entity;
 
-import com.example.sahil.eventportal.models.dto.PostEventDTO;
+import com.example.sahil.eventportal.models.dto.requestDto.PostEventDTO;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 

@@ -1,4 +1,4 @@
-package com.example.sahil.eventportal.models.dto;
+package com.example.sahil.eventportal.models.dto.requestDto;
 
 import com.example.sahil.eventportal.models.entity.Department;
 

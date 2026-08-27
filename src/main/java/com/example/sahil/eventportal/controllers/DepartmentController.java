@@ -1,9 +1,9 @@
 package com.example.sahil.eventportal.controllers;
 
-import com.example.sahil.eventportal.models.dto.DepartmentDTO;
-import com.example.sahil.eventportal.models.dto.DeptUsersDTO;
-import com.example.sahil.eventportal.models.dto.EventDTO;
-import com.example.sahil.eventportal.models.dto.UserDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.DepartmentDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.DeptUsersDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.EventDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.UserDTO;
 import com.example.sahil.eventportal.models.entity.Department;
 import com.example.sahil.eventportal.service.DepartmentService.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,7 @@
 package com.example.sahil.eventportal.service.RegistrationService;
 
-import com.example.sahil.eventportal.Enumerated;
-import com.example.sahil.eventportal.models.dto.PostRegistrationDTO;
-import com.example.sahil.eventportal.models.dto.RegistrationDTO;
+import com.example.sahil.eventportal.models.dto.requestDto.PostRegistrationDTO;
+import com.example.sahil.eventportal.models.dto.responseDto.RegistrationDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

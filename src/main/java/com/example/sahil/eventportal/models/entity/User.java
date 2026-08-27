@@ -1,6 +1,6 @@
 package com.example.sahil.eventportal.models.entity;
 
-import com.example.sahil.eventportal.models.dto.PostUserDTO;
+import com.example.sahil.eventportal.models.dto.requestDto.PostUserDTO;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -130,11 +130,12 @@ public class User {
         this.roles = roles;
     }
 
-    public void addRole(Role role) {
+    public void addRole(Role role){
         if (this.roles == null) {
             this.roles = new HashSet<>();
         }
         this.roles.add(role);
+        role.getUsers().add(this);
     }
 
     public Set<Event> getOrganizedEvents() {
@@ -159,4 +160,5 @@ public class User {
     public void setRegistrations(Set<Registration> registrations) {
         this.registrations = registrations;
     }
+
 }
